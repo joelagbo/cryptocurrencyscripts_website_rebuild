@@ -1,0 +1,44 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Pagination from "../../components/Pagination.astro";
+import PostRow from "../../components/PostRow.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { getPosts, POSTS_PER_PAGE } from "../../lib/content";
+import { breadcrumbJsonLd, pageUrl } from "../../lib/seo";
+
+export async function getStaticPaths({ paginate }) {
+  return paginate(getPosts(), { pageSize: POSTS_PER_PAGE });
+}
+
+const { page } = Astro.props;
+const paged = page.currentPage > 1;
+const title = paged
+  ? `Blog - Page ${page.currentPage} - CryptocurrencyScripts`
+  : "Blog - CryptocurrencyScripts";
+const crumbs = [
+  { name: "Home", href: "/" },
+  { name: "Blog", href: "/blog/" },
+];
+const prev = page.url.prev ? pageUrl(page.url.prev) : undefined;
+const next = page.url.next ? pageUrl(page.url.next) : undefined;
+---
+
+<Layout
+  title={title}
+  description="Read the latest publications on our thought leadership blog covering crypto, web3, and blockchain."
+  robots={paged ? "noindex, follow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"}
+  prev={prev}
+  next={next}
+  jsonLd={paged ? [] : [breadcrumbJsonLd(crumbs)]}
+>
+  <div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <h1 class="page-title">Blog</h1>
+    <form action="/search/" method="get" role="search">
+      <label class="skip" for="blog-search">Search articles</label>
+      <input class="search-box" id="blog-search" type="search" name="s" placeholder="Search articles" />
+    </form>
+    {page.data.map((post) => <PostRow post={post} />)}
+    <Pagination current={page.currentPage} totalPages={page.lastPage} base="/blog/" />
+  </div>
+</Layout>

@@ -1,0 +1,32 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PostRow from "../../components/PostRow.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { getTags, postsByTag } from "../../lib/content";
+import { breadcrumbJsonLd } from "../../lib/seo";
+
+export function getStaticPaths() {
+  return getTags().map((t) => ({ params: { slug: t.slug } }));
+}
+
+const { slug } = Astro.params;
+const tag = getTags().find((t) => t.slug === slug)!;
+const posts = postsByTag(slug!);
+const crumbs = [
+  { name: "Home", href: "/" },
+  { name: "Blog", href: "/blog/" },
+  { name: tag.name, href: `/tag/${tag.slug}/` },
+];
+---
+
+<Layout
+  title={`${tag.name} Archives - CryptocurrencyScripts`}
+  description={`Articles tagged ${tag.name} on CryptocurrencyScripts.`}
+  jsonLd={[breadcrumbJsonLd(crumbs)]}
+>
+  <div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <h1 class="page-title">{tag.name}</h1>
+    {posts.map((post) => <PostRow post={post} />)}
+  </div>
+</Layout>

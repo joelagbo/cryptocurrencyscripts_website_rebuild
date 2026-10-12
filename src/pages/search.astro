@@ -1,0 +1,47 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getPosts } from "../lib/content";
+
+const index = getPosts().map((p) => ({
+  slug: p.slug,
+  title: p.title.replace(/<[^>]+>/g, ""),
+  excerpt: p.excerptText,
+  date: p.date,
+}));
+---
+
+<Layout
+  title="Search - CryptocurrencyScripts"
+  description="Search CryptocurrencyScripts articles."
+  robots="noindex, follow"
+>
+  <div class="wrap">
+    <h1 class="page-title">Search</h1>
+    <input class="search-box" id="q" type="search" placeholder="Search articles" />
+    <div id="results"></div>
+  </div>
+</Layout>
+
+<script define:vars={{ index }}>
+  const input = document.getElementById("q");
+  const results = document.getElementById("results");
+  const params = new URLSearchParams(location.search);
+  const initial = params.get("s") || params.get("q") || "";
+
+  function render(term) {
+    const q = term.trim().toLowerCase();
+    const hits = q
+      ? index.filter((p) => `${p.title} ${p.excerpt}`.toLowerCase().includes(q))
+      : index.slice(0, 12);
+    results.innerHTML = hits
+      .map(
+        (p) =>
+          `<article class="post-row" style="grid-template-columns:1fr"><div><h2><a href="/${p.slug}/">${p.title}</a></h2><p>${p.excerpt}</p></div></article>`
+      )
+      .join("") || "<p>No matching articles.</p>";
+  }
+
+  input.value = initial;
+  render(initial);
+  input.addEventListener("input", () => render(input.value));
+</script>

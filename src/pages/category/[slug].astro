@@ -1,0 +1,36 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PostRow from "../../components/PostRow.astro";
+import Pagination from "../../components/Pagination.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { getCategories, postsByCategory, paginate } from "../../lib/content";
+import { breadcrumbJsonLd, pageUrl } from "../../lib/seo";
+
+export function getStaticPaths() {
+  return getCategories().map((c) => ({ params: { slug: c.slug } }));
+}
+
+const { slug } = Astro.params;
+const cat = getCategories().find((c) => c.slug === slug)!;
+const { items, current, totalPages } = paginate(postsByCategory(slug!), 1);
+const crumbs = [
+  { name: "Home", href: "/" },
+  { name: "Blog", href: "/blog/" },
+  { name: cat.name, href: `/category/${cat.slug}/` },
+];
+const next = totalPages > 1 ? pageUrl(`/category/${slug}/2/`) : undefined;
+---
+
+<Layout
+  title={`${cat.name} Archives - CryptocurrencyScripts`}
+  description={`Articles in ${cat.name} from CryptocurrencyScripts.`}
+  next={next}
+  jsonLd={[breadcrumbJsonLd(crumbs)]}
+>
+  <div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <h1 class="page-title">{cat.name}</h1>
+    {items.map((post) => <PostRow post={post} />)}
+    <Pagination current={current} totalPages={totalPages} base={`/category/${slug}/`} />
+  </div>
+</Layout>

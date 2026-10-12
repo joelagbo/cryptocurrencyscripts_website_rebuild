@@ -1,0 +1,94 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import {
+  getPosts,
+  getPost,
+  reservedSlugs,
+  categoryById,
+  tagById,
+  formatDate,
+  neighbors,
+  relatedPosts,
+  decodeEntities,
+  plainTitle,
+} from "../lib/content";
+import { articleJsonLd, breadcrumbJsonLd, SITE_URL } from "../lib/seo";
+
+export function getStaticPaths() {
+  return getPosts()
+    .filter((p) => !reservedSlugs.has(p.slug))
+    .map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const post = getPost(slug!);
+if (!post) throw new Error("Missing post");
+
+const cats = post.categories.map((id) => categoryById(id)).filter(Boolean);
+const tags = post.tags.map((id) => tagById(id)).filter(Boolean);
+const { newer, older } = neighbors(post);
+const related = relatedPosts(post);
+const title = post.seoTitle || `${decodeEntities(post.title)} - CryptocurrencyScripts`;
+const description = post.seoDescription || decodeEntities(post.excerptText);
+const headline = plainTitle(post);
+const crumbs = [
+  { name: "Home", href: "/" },
+  { name: "Blog", href: "/blog/" },
+  ...(cats[0] ? [{ name: cats[0]!.name, href: `/category/${cats[0]!.slug}/` }] : []),
+  { name: headline, href: `/${post.slug}/` },
+];
+---
+
+<Layout
+  title={title}
+  description={description}
+  image={post.featuredImage}
+  type="article"
+  publishedTime={new Date(post.date).toISOString()}
+  modifiedTime={new Date(post.modified || post.date).toISOString()}
+  jsonLd={[breadcrumbJsonLd(crumbs), articleJsonLd(post, headline, description)]}
+>
+  <article class="wrap article">
+    <Breadcrumbs items={crumbs} />
+    <p>
+      {cats.map((c) => (
+        <a class="cat-link" href={`/category/${c!.slug}/`}>{c!.name}</a>
+      ))}
+    </p>
+    <h1 class="page-title" set:html={post.title} />
+    <p class="article-meta">
+      <time datetime={post.date}>{formatDate(post.date)}</time>
+      {post.readingTime && ` · ${post.readingTime}`}
+    </p>
+    {post.featuredImage && <img class="hero-img" src={post.featuredImage} alt={headline} />}
+    <div class="share">
+      <a href={`https://x.com/intent/tweet?url=${encodeURIComponent(`${SITE_URL}/${post.slug}/`)}`} rel="noopener noreferrer">Share on X</a>
+      <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`${SITE_URL}/${post.slug}/`)}`} rel="noopener noreferrer">Facebook</a>
+      <a href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(`${SITE_URL}/${post.slug}/`)}`} rel="noopener noreferrer">LinkedIn</a>
+    </div>
+    <div class="prose" set:html={post.content} />
+    {tags.length > 0 && (
+      <p>
+        {tags.map((t) => (
+          <a class="cat-link" href={`/tag/${t!.slug}/`}>{t!.name}</a>
+        ))}
+      </p>
+    )}
+    <div class="neighbors">
+      {older ? <a href={`/${older.slug}/`} rel="prev">← <span set:html={older.title} /></a> : <span />}
+      {newer ? <a href={`/${newer.slug}/`} rel="next"><span set:html={newer.title} /> →</a> : <span />}
+    </div>
+    <aside class="more-posts">
+      <h2>More posts</h2>
+      <ul>
+        {related.map((p) => (
+          <li>
+            <a href={`/${p.slug}/`} set:html={p.title} />
+            <div><time datetime={p.date}>{formatDate(p.date)}</time></div>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  </article>
+</Layout>

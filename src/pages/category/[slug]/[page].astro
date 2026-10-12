@@ -1,0 +1,47 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import PostRow from "../../../components/PostRow.astro";
+import Pagination from "../../../components/Pagination.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import { getCategories, postsByCategory, paginate, POSTS_PER_PAGE } from "../../../lib/content";
+import { pageUrl } from "../../../lib/seo";
+
+export function getStaticPaths() {
+  return getCategories().flatMap((c) => {
+    const all = postsByCategory(c.slug);
+    const last = Math.max(1, Math.ceil(all.length / POSTS_PER_PAGE));
+    const paths = [];
+    for (let p = 2; p <= last; p++) {
+      paths.push({ params: { slug: c.slug, page: String(p) } });
+    }
+    return paths;
+  });
+}
+
+const slug = Astro.params.slug!;
+const pageNum = Number(Astro.params.page);
+const cat = getCategories().find((c) => c.slug === slug)!;
+const { items, current, totalPages } = paginate(postsByCategory(slug), pageNum);
+const crumbs = [
+  { name: "Home", href: "/" },
+  { name: "Blog", href: "/blog/" },
+  { name: cat.name, href: `/category/${cat.slug}/` },
+];
+const prev = pageUrl(pageNum === 2 ? `/category/${slug}/` : `/category/${slug}/${pageNum - 1}/`);
+const next = current < totalPages ? pageUrl(`/category/${slug}/${pageNum + 1}/`) : undefined;
+---
+
+<Layout
+  title={`${cat.name} - Page ${pageNum} - CryptocurrencyScripts`}
+  description={`Articles in ${cat.name} from CryptocurrencyScripts.`}
+  robots="noindex, follow"
+  prev={prev}
+  next={next}
+>
+  <div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <h1 class="page-title">{cat.name}</h1>
+    {items.map((post) => <PostRow post={post} />)}
+    <Pagination current={current} totalPages={totalPages} base={`/category/${slug}/`} />
+  </div>
+</Layout>

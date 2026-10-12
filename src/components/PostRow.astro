@@ -1,0 +1,29 @@
+---
+import { categoryById, formatDate, decodeEntities, type Post } from "../lib/content";
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const cat = post.categories.map((id) => categoryById(id)).find(Boolean);
+---
+
+<article class="post-row">
+  <a href={`/${post.slug}/`}>
+    {post.featuredImage ? (
+      <img src={post.featuredImage} alt={decodeEntities(post.title)} />
+    ) : (
+      <div class="rounded" style="height:140px;background:var(--accent-5)"></div>
+    )}
+  </a>
+  <div>
+    {cat && (
+      <a class="cat-link" href={`/category/${cat.slug}/`}>{cat.name}</a>
+    )}
+    <h2><a href={`/${post.slug}/`} set:html={post.title} /></h2>
+    <p class="excerpt">{post.excerptText}</p>
+    <p><a class="read-more" href={`/${post.slug}/`}>Read More</a></p>
+    <time datetime={post.date}>{formatDate(post.date)}</time>
+  </div>
+</article>

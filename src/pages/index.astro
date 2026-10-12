@@ -1,0 +1,272 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const services = [
+  {
+    n: "1",
+    title: "GTM Services",
+    text: "Leverage Expert content and advisory services for your project launch. Niche coverage includes memecoins and Utility projects.",
+    href: "https://www.fiverr.com/s/7YpwYlE",
+    featured: true,
+  },
+  {
+    n: "2",
+    title: "Technical Writing",
+    text: "Attract seed investors and impress your community with a professional whitepaper, documentation, and Launch book.",
+    href: "https://www.fiverr.com/s/ljGYjPj",
+  },
+  {
+    n: "3",
+    title: "Content Writing",
+    text: "Educational blogs, product user guides, Product Reviews, and Social media threads are covered in our content writing service.",
+    href: "https://www.fiverr.com/s/ljGYjPj",
+  },
+  {
+    n: "4",
+    title: "Copywriting",
+    text: "Drive sales through marketing copies that sell. We prepare one-liners, social media posts, and promotional articles that attract investors and product users.",
+    href: "https://www.fiverr.com/s/ljGYjPj",
+  },
+  {
+    n: "5",
+    title: "SEO Optimization",
+    text: "Get your articles to the top of search engine rankings. We modify existing blog and landing page content to rank higher on search pages.",
+    href: "https://www.fiverr.com/s/EgePLAy",
+  },
+  {
+    n: "6",
+    title: "ScriptWriting",
+    text: "Grow your followers, build your brand voice, and drive more sales with promotional and educational video scripts.",
+    href: "https://www.fiverr.com/s/NN5bN1R",
+  },
+];
+
+const logos = [
+  ["coingecko.png", "CoinGecko"],
+  ["movement.png", "Movement"],
+  ["coingape.png", "CoinGape"],
+  ["naoris.png", "Naoris"],
+  ["dexcheck.jpeg", "DexCheck"],
+  ["aigo.jpeg", "Aigo"],
+  ["dailyforex.jpeg", "DailyForex"],
+  ["nervos-1.png", "Nervos"],
+  ["tectum.jpeg", "Tectum"],
+  ["koi.png", "Koi"],
+  ["MEXC.jpg", "MEXC"],
+  ["verus.png", "Verus"],
+];
+
+const cases = [
+  {
+    img: "CSCG.png",
+    title: "Coingecko – Content Writing services",
+    text: "Excerpts from our 3-year log content writing contract with crypto analytics project, Coingecko.",
+    href: "/case-study-our-three-year-content-partnership-with-coingecko/",
+  },
+  {
+    img: "CSML.png",
+    title: "Movement Labs – GTM Technical Writing",
+    text: "How we developed GTM content for Movement Labs’ fundraiser and public launch.",
+    href: "/case-study-our-technical-writing-partnership-with-movement-labs/",
+  },
+  {
+    img: "CSDC-1.png",
+    title: "DexCheck – Digital marketing and Content Writing services",
+    text: "Insights on our year-long involvement with DexCheck as a digital marketing service team.",
+    href: "/case-study-our-two-year-growth-partnership-with-dexcheck-ai/",
+  },
+];
+---
+
+<Layout
+  title="CryptocurrencyScripts | Crypto & Web3 Marketing Services"
+  description="CryptocurrencyScripts is an expert marketing, content, and technical writing firm for crypto and web3 projects. Serving 700,000+ readers and 20+ clients."
+>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Kickstart Your Crypto Journey</h1>
+        <p class="lead">
+          Web3 is the new internet. We offer cost-efficient services that help founders and investors navigate the crypto space.
+        </p>
+        <a class="btn btn-white" href="#service">Book A Service</a>
+      </div>
+        <img class="rounded hide-mobile" src="/uploads/2025/11/Bitcoin-3310-4.jpg" alt="Bitcoin against a city skyline" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split">
+      <img class="rounded" src="/uploads/2025/11/uptrend.png" alt="Upward crypto market trend" />
+      <div>
+        <h2 class="display">Your Reliable Web3 Assistant</h2>
+        <p class="lead">Grow your project and investment with our expert services tailored for you.</p>
+        <ul class="check-list lead">
+          <li>Crypto and Blockchain Educational Resources for Investors</li>
+          <li>Content, Marketing, and Advisory services for project teams.</li>
+          <li>Protocol Designs, Documentation, and Technical Writing services</li>
+        </ul>
+        <a class="btn btn-lime" href="/contact-us/">Contact Us ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="service">
+    <div class="wrap">
+      <h2 class="display section-head" style="margin-bottom:40px">We Offer a Range of Services</h2>
+      <div class="services">
+        {services.map((s) => (
+          <article class:list={["service", s.featured && "featured"]}>
+            <div class="num">{s.n}</div>
+            <h2>{s.title}</h2>
+            <p>{s.text}</p>
+            <a class="btn-ghost" href={s.href} target="_blank" rel="noopener noreferrer"><strong>Learn More</strong> ↗</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--accent-5)">
+    <div class="wrap quotes">
+      <blockquote>
+        <p class="stars">★★★★★</p>
+        <h4>“This team Demonstrates exceptional attention to detail, consistently reliable, and maintains a high level of professionalism in every task.”</h4>
+        <p><strong>Dan L</strong>, Seoul, Korea</p>
+      </blockquote>
+      <blockquote>
+        <p class="stars">★★★★★</p>
+        <h2 style="font-size:1.25rem">“Hey, great work on this! I learnt quite a lot from this article.”</h2>
+        <p>Vera L, Coingecko</p>
+      </blockquote>
+      <blockquote>
+        <p class="stars">★★★★★</p>
+        <h2 style="font-size:1.25rem">“Thank you for your work! Incredible team! Humble and honest”</h2>
+        <p>Max, CoinLore, UAE</p>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2 class="section-head" style="font-size:2rem;margin-bottom:40px">Projects We Have Worked With</h2>
+      <div class="logos">
+        {logos.map(([file, name]) => (
+          <img src={`/uploads/2025/11/${file}`} alt={name} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split">
+      <div>
+        <h2 class="display">Mission And Vision Statement</h2>
+        <p class="lead">
+          Deciding to dive into the most volatile tech and investment sector is bold. This is true for investors and innovators. We envision an environment where both factions thrive.
+        </p>
+        <p class="lead">
+          With over 8 years of experience and counting, we operate with a genuine understanding of the industry. We are dedicated to assisting founders and the everyday investor to navigate the crypto and blockchain industry and achieve sustainable goals
+        </p>
+        <a class="btn btn-lime" href="/about-us/"><strong>Learn More</strong> ↗</a>
+      </div>
+      <img class="rounded hide-mobile" src="/uploads/2025/11/chart-6573688_640.jpg" alt="generate profits with your crypto investment through expert market analytics" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap why">
+      <div class="why-grid">
+        <div class="why-copy">
+          <h2 class="display">Why Work With Us?</h2>
+          <p>
+            We’d quote the popular line from The Wolf of Wall Street, but you’re better off verifying from the listed projects we have worked with. Cost-efficient, timely, and expert delivery; quality is non-negotiable. We are your friends in crypto.
+          </p>
+          <hr class="hr" />
+          <div class="contact-row">
+            <img src="/uploads/2025/11/tg.png" alt="" width="25" height="25" />
+            <a href="https://t.me/Cryptoscriptstg" rel="noopener noreferrer">@Cryptoscriptstg</a>
+          </div>
+          <div class="contact-row">
+            <span>✉</span>
+            <a href="mailto:Support@cryptocurrencyscripts.com">Support@cryptocurrencyscripts.com</a>
+          </div>
+          <div class="contact-row">
+            <span>📍</span>
+            <span>Remote</span>
+          </div>
+        </div>
+        <div class="why-media">
+          <img src="/uploads/2025/11/stock-exchange-7044787_640.jpg" alt="Trading floor" />
+          <div class="why-stats stats">
+            <div>
+              <p class="stat-num">700K</p>
+              <p>Blog Readers</p>
+            </div>
+            <div>
+              <p class="stat-num">20+</p>
+              <p>Past Clients</p>
+            </div>
+            <div>
+              <p class="stat-num">8</p>
+              <p>Years experience</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="clients">
+    <div class="wrap">
+      <h2 class="display section-head">Client <strong>Case studies</strong></h2>
+      <p class="section-sub">Read overviews of how we handled past clients and the results we achieved.</p>
+      <div class="cards-3">
+        {cases.map((c) => (
+          <article class="case">
+            <img src={`/uploads/2025/11/${c.img}`} alt={c.title} />
+            <h2 style="font-size:1.35rem;margin-top:18px"><a href={c.href}><strong>{c.title}</strong></a></h2>
+            <p>{c.text}</p>
+            <a href={c.href}><strong>Learn More ↗</strong></a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section about-band" id="about">
+    <div class="wrap">
+      <h2 class="display">Trusted by 20+ Projects and 700,000 Readers</h2>
+      <p>We are CryptocurrencyScripts, a team of independent Web3 and blockchain writers, researchers, Marketers, and analysts.</p>
+      <p>CryptocurrencyScripts specializes in concepts and developments around decentralized technology and helps projects and investors thrive through content and digital marketing.</p>
+      <p>8 years strong, and counting; we are committed to the most interesting sector on the internet.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2 class="display section-head">Latest from our blog</h2>
+      <p class="section-sub">Read the latest publications on our thought leadership blog.</p>
+      <div class="blog-tease">
+        <article>
+          <img class="rounded" src="/uploads/2025/11/image.jpg" alt="American President Donald Trump holding Bitcoin coins in both hands" />
+          <p class="lead" style="font-weight:600">Donald Trump is still a proper crypto president</p>
+          <hr class="hr" />
+          <div class="meta-row">
+            <a href="/donald-trump-is-still-a-proper-crypto-president/"><strong>Continue Reading</strong> ↗</a>
+            <span>14 Mar 2025</span>
+          </div>
+        </article>
+        <article>
+          <img class="rounded" src="/uploads/2025/11/image-1.jpg" alt="Gamblers betting on DogeCoin" />
+          <p class="lead" style="font-weight:600">When the markets return, memecoins will win again</p>
+          <hr class="hr" />
+          <div class="meta-row">
+            <a href="/when-the-market-returns-memecoins-will-win-again/"><strong>Continue Reading</strong> ↗</a>
+            <span>25 Mar 2025</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</Layout>

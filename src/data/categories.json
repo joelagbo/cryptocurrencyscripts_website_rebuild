@@ -1,0 +1,38 @@
+[
+  {
+    "id": 186,
+    "slug": "case-studies",
+    "name": "Case Studies",
+    "count": 3
+  },
+  {
+    "id": 16,
+    "slug": "educational-contents",
+    "name": "Educational contents",
+    "count": 41
+  },
+  {
+    "id": 1,
+    "slug": "uncategorized",
+    "name": "Free flow",
+    "count": 17
+  },
+  {
+    "id": 107,
+    "slug": "official-announcements",
+    "name": "OFFICIAL ANNOUNCEMENTS",
+    "count": 2
+  },
+  {
+    "id": 33,
+    "slug": "opinion-corner",
+    "name": "Opinion corner",
+    "count": 41
+  },
+  {
+    "id": 17,
+    "slug": "promotional-contents",
+    "name": "Promotional contents",
+    "count": 9
+  }
+]
