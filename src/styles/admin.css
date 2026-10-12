@@ -1,0 +1,192 @@
+.cms {
+  --cms-bg: #f4f7f6;
+  --cms-ink: #193e39;
+  --cms-muted: #5f5f5f;
+  --cms-line: #d7e0dd;
+  --cms-accent: #1c7e6e;
+  --cms-lime: #7ced51;
+  min-height: 100vh;
+  background: var(--cms-bg);
+  color: var(--cms-ink);
+  font-family: Manrope, "Segoe UI", sans-serif;
+}
+
+.cms-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  background: #193e39;
+  color: #fff;
+}
+
+.cms-top a {
+  color: #fff;
+}
+
+.cms-top h1 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.cms-body {
+  width: min(1100px, calc(100% - 32px));
+  margin: 24px auto 64px;
+}
+
+.cms-card {
+  background: #fff;
+  border: 1px solid var(--cms-line);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.cms-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.cms-search {
+  width: 100%;
+  max-width: 360px;
+  min-height: 44px;
+  border: 1px solid var(--cms-line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font: inherit;
+}
+
+.cms-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cms-table th,
+.cms-table td {
+  text-align: left;
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--cms-line);
+  vertical-align: top;
+}
+
+.cms-table th {
+  font-size: 0.85rem;
+  color: var(--cms-muted);
+}
+
+.cms-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cms-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  background: var(--cms-lime);
+  color: var(--cms-ink);
+}
+
+.cms-btn.secondary {
+  background: #e8eeec;
+}
+
+.cms-btn.danger {
+  background: #c0392b;
+  color: #fff;
+}
+
+.cms-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.cms-field {
+  margin: 14px 0;
+}
+
+.cms-field label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.cms-field input,
+.cms-field textarea,
+.cms-field select {
+  width: 100%;
+  border: 1px solid var(--cms-line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font: inherit;
+}
+
+.cms-cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+}
+
+.cms-cats label {
+  font-weight: 500;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.cms-status {
+  margin: 12px 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+}
+
+.cms-status.ok {
+  background: #e8f8e0;
+}
+
+.cms-status.err {
+  background: #fdecea;
+}
+
+.cms-hidden {
+  display: none;
+}
+
+.ql-toolbar.ql-snow,
+.ql-container.ql-snow {
+  border-color: var(--cms-line);
+}
+
+.ql-container.ql-snow {
+  min-height: 280px;
+  font-size: 1rem;
+  background: #fff;
+}
+
+.cms-help {
+  color: var(--cms-muted);
+  font-size: 0.92rem;
+}
+
+@media (max-width: 700px) {
+  .cms-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cms-table th:nth-child(2),
+  .cms-table td:nth-child(2) {
+    display: none;
+  }
+}

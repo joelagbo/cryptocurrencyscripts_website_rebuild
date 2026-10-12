@@ -26,6 +26,16 @@ npm run preview
 
 Production files are written to `dist/`. Deploy that folder to any static host (Vercel, Netlify, Cloudflare Pages, GitHub Pages).
 
+## Blog CMS
+
+The admin lives at `/cms/` and commits changes to GitHub (`src/data/posts.json` plus uploaded images). Cloudflare Pages then rebuilds the static site.
+
+1. Open `/cms/`
+2. Create a fine-grained GitHub token with **Contents: Read and write** on this repo
+3. Sign in, then create, edit, or delete posts
+
+The token is stored in the browser tab only (`sessionStorage`). Cloudflare Pages must be connected to this GitHub repo for publishes to go live automatically.
+
 ## Content
 
 Blog posts, categories, and tags live in `src/data/` (imported from the WordPress REST API). Images are in `public/uploads/`.

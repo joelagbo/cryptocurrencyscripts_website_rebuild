@@ -46,6 +46,9 @@ export const reservedSlugs = new Set([
   "category",
   "tag",
   "search",
+  "admin",
+  "cms",
+  "sitemap",
 ]);
 
 export function getPosts(): Post[] {
@@ -57,7 +60,10 @@ export function getPost(slug: string) {
 }
 
 export function getCategories(): Category[] {
-  return categories;
+  return categories.map((c) => ({
+    ...c,
+    count: posts.filter((p) => p.categories.includes(c.id)).length,
+  }));
 }
 
 export function getTags(): Tag[] {

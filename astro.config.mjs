@@ -15,7 +15,7 @@ export default defineConfig({
     sitemap({
       filter(page) {
         const pathname = new URL(page).pathname;
-        if (pathname === "/search/" || pathname === "/contact/" || pathname === "/feed/" || pathname === "/sitemap.xml/") return false;
+        if (pathname === "/search/" || pathname === "/contact/" || pathname === "/feed/" || pathname === "/sitemap.xml/" || pathname === "/admin/" || pathname === "/cms/") return false;
         if (/^\/blog\/\d+\/$/.test(pathname)) return false;
         if (/^\/category\/.+\/\d+\/$/.test(pathname)) return false;
         return true;
@@ -55,5 +55,6 @@ export default defineConfig({
   ],
   redirects: {
     "/contact": "/contact-us/",
+    "/admin": "/cms/",
   },
 });
